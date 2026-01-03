@@ -1,17 +1,82 @@
-const J_BEW_ASSETS = [
-    { 
-        id: 1, 
-        title: "โพสต์ประกาศศักดา (Sales Post)", 
-        content: "เขียนโพสต์ขาย 'เจ๊เบวไอซ์ซิ่ง' ให้ดูพรีเมียมและจริงใจ \nสินค้า: 0.5g/350.- และ 1g/700.- \nเน้นความละเอียดและคุณภาพที่เหนือกว่า \nปิดท้ายด้วยการโอนเงินที่: กสิกรไทย 2228139532" 
-    },
-    { 
-        id: 2, 
-        title: "ปิดการขาย (Closing Deal)", 
-        content: "เขียนข้อความตอบแชทลูกค้าที่สนใจสินค้าเจ๊เบว \nสรุปยอด 0.5g หรือ 1g ให้ชัดเจน \nส่งเลขบัญชี: กสิกรไทย 2228139532 ให้ลูกค้าโอนได้ง่ายที่สุด" 
-    },
-    { 
-        id: 3, 
-        title: "เพื่อนคู่คิดเจ๊เบว (J-Bew Companion)", 
-        content: "จงเป็นที่ปรึกษาธุรกิจให้แบรนด์ 'เจ๊เบวไอซ์ซิ่ง' \nช่วยวางแผนการกระจายสินค้าให้เบาแรงแต่ได้เงินไว \nเริ่มต้นด้วยการถามว่า 'วันนี้เจ๊เบวอยากลุยตลาดโซนไหนดีคะ?'" 
-    }
-];
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J-BEW ICING | น้ำแข็งใสพรีเมียม</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;600&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            background: linear-gradient(180deg, #e0f2fe 0%, #ffffff 100%); 
+            color: #0c4a6e; 
+            font-family: 'Anuphan', sans-serif; 
+            min-height: 100vh;
+        }
+        .frost-card { 
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(186, 230, 253, 0.5);
+        }
+        .btn-pay {
+            background: #0ea5e9;
+            color: white;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .btn-pay:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(14, 165, 233, 0.3); }
+        .ice-texture {
+            background-image: radial-gradient(#bae6fd 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center p-4 ice-texture">
+
+    <div class="w-full max-w-md frost-card p-10 text-center animate-reveal">
+        <div class="mb-8">
+            <div class="text-4xl mb-2">🍧</div>
+            <h1 class="font-serif italic text-4xl text-[#0ea5e9] tracking-tighter">J-BEW ICING</h1>
+            <p class="text-[10px] tracking-[0.3em] font-bold text-sky-400 uppercase mt-1">The Finest Shaved Ice</p>
+        </div>
+
+        <div class="space-y-4 mb-10">
+            <div class="flex justify-between items-center p-5 bg-white/40 rounded-2xl border border-sky-100">
+                <span class="font-semibold text-lg">ขนาดเล็ก (0.5)</span>
+                <span class="text-2xl font-bold text-sky-600">350.-</span>
+            </div>
+            <div class="flex justify-between items-center p-5 bg-white/40 rounded-2xl border border-sky-100">
+                <span class="font-semibold text-lg">ขนาดใหญ่ (1)</span>
+                <span class="text-2xl font-bold text-sky-600">700.-</span>
+            </div>
+        </div>
+
+        <div class="mb-10 p-6 bg-sky-50 rounded-3xl border-2 border-sky-200">
+            <p class="text-[11px] font-bold text-sky-500 uppercase tracking-widest mb-3">ช่องทางชำระเงิน (โอนไว)</p>
+            <div class="text-3xl font-bold tracking-tight text-sky-900 mb-1">222-813-9532</div>
+            <p class="font-semibold">ธนาคารกสิกรไทย</p>
+            <p class="text-sm opacity-70">ชื่อบัญชี: เมธี แก้วแดง</p>
+        </div>
+
+        <div class="space-y-4">
+            <button onclick="copyToClipboard('2228139532')" class="w-full py-5 btn-pay rounded-2xl font-bold text-lg">
+                คัดลอกเลขบัญชี
+            </button>
+            <p class="text-[10px] text-sky-400 font-bold uppercase tracking-widest">โอนแล้วแจ้งสลิปในแชทได้เลยครับ</p>
+        </div>
+
+        <div class="mt-12 pt-6 border-t border-sky-100 opacity-40">
+            <p class="text-[9px] tracking-widest">ARCHITECTED BY BLACKSMITH-Ω</p>
+        </div>
+    </div>
+
+    <script>
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert("คัดลอกเลขบัญชีเจ๊เบวแล้วครับ: " + text);
+            });
+        }
+    </script>
+</body>
+</html>
