@@ -1,81 +1,79 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>J-BEW ICING | งานเกรดพรีเมียม</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;600&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
+    <title>Ω VIRTUAL SHOGUN v2.0</title>
     <style>
-        body { 
-            background: linear-gradient(180deg, #e0f2fe 0%, #ffffff 100%); 
-            color: #0c4a6e; 
-            font-family: 'Anuphan', sans-serif; 
-            min-height: 100vh;
+        :root {
+            --bg: #0a0a0a; --card: #111; --accent: #8aff8a; --text: #eee;
         }
-        .frost-card { 
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(15px);
-            border: 2px solid rgba(255, 255, 255, 0.8);
-            border-radius: 30px;
-            box-shadow: 0 10px 30px rgba(186, 230, 253, 0.5);
+        body {
+            margin: 0; font-family: 'Courier New', Courier, monospace;
+            background: var(--bg); color: var(--text); display: flex; flex-direction: column; align-items: center;
         }
-        .btn-pay {
-            background: #0ea5e9;
-            color: white;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .btn-pay:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(14, 165, 233, 0.3); }
-        .ice-texture {
-            background-image: radial-gradient(#bae6fd 0.5px, transparent 0.5px);
-            background-size: 20px 20px;
-        }
+        header { width: 100%; padding: 20px; text-align: center; border-bottom: 1px solid var(--accent); color: var(--accent); font-weight: bold; letter-spacing: 3px; }
+        main { width: 90%; max-width: 500px; padding: 30px 0; }
+        .box { background: var(--card); padding: 25px; border: 1px solid #222; border-radius: 4px; }
+        label { font-size: 10px; color: var(--accent); display: block; margin-bottom: 5px; letter-spacing: 1px; }
+        select, input { width: 100%; padding: 12px; background: #000; border: 1px solid #333; color: #fff; margin-bottom: 20px; outline: none; box-sizing: border-box; }
+        button { width: 100%; padding: 18px; background: var(--accent); color: #000; border: none; font-weight: bold; cursor: pointer; letter-spacing: 2px; }
+        .prompt-box { margin-top: 20px; background: #000; padding: 15px; border-left: 3px solid var(--accent); font-size: 12px; line-height: 1.5; color: #888; cursor: pointer; }
+        .copy-hint { font-size: 9px; color: var(--accent); margin-top: 5px; text-align: right; }
     </style>
 </head>
-<body class="flex items-center justify-center p-4 ice-texture">
+<body>
+    <header>Ω VIRTUAL SHOGUN v2.0</header>
+    <main>
+        <div class="box">
+            <label>CHOOSE EMOTION (เลือกอารมณ์)</label>
+            <select id="emotion">
+                <option value="confident smirk, looking at camera">😏 มั่นใจ / มองกล้อง</option>
+                <option value="mischievous cunning smile, teasing">😈 กวน / ยิ้มเจ้าเล่ห์</option>
+                <option value="stoic, cool, indifferent expression">😐 นิ่ง / เท่</option>
+                <option value="bored, tired eyes, half-closed eyelids">😴 เบื่อโลก</option>
+                <option value="relaxed internet idol vibe, soft smile">😌 ชิลแบบเน็ตไอดอล</option>
+            </select>
 
-    <div class="w-full max-w-md frost-card p-10 text-center animate-reveal">
-        <div class="mb-8">
-            <div class="text-4xl mb-2">🍧</div>
-            <h1 class="font-serif italic text-4xl text-[#0ea5e9] tracking-tighter">J-BEW ICING</h1>
-            <p class="text-[10px] tracking-[0.3em] font-bold text-sky-400 uppercase mt-1">The Finest Shaved Ice</p>
+            <label>ATTIRE (ชุด)</label>
+            <select id="clothing">
+                <option value="oversized techwear hoodie">HOODIE (ฮู้ด)</option>
+                <option value="minimalist oversize t-shirt">T-SHIRT (เสื้อยืด)</option>
+                <option value="stylish street jacket">JACKET (แจ็กเก็ต)</option>
+            </select>
+
+            <label>SUBJECT (ชื่อหรือสิ่งของที่ถือ)</label>
+            <input id="subject" type="text" placeholder="เช่น holding smartphone, black hair...">
+
+            <button onclick="forge()">FORGE IDENTITY</button>
         </div>
 
-        <div class="space-y-4 mb-10">
-            <div class="flex justify-between items-center p-5 bg-white/40 rounded-2xl border border-sky-100">
-                <span class="font-semibold text-lg">ขนาดเล็ก (0.5)</span>
-                <span class="text-2xl font-bold text-sky-600">400.-</span>
-            </div>
-            <div class="flex justify-between items-center p-5 bg-white/40 rounded-2xl border border-sky-100">
-                <span class="font-semibold text-lg">ขนาดใหญ่ (1)</span>
-                <span class="text-2xl font-bold text-sky-600">700.-</span>
-            </div>
-        </div>
-
-        <div class="mb-10 p-6 bg-sky-50 rounded-3xl border-2 border-sky-200">
-            <p class="text-[11px] font-bold text-sky-500 uppercase tracking-widest mb-3">ช่องทางชำระเงิน (โอนไว)</p>
-            <div class="text-3xl font-bold tracking-tight text-sky-900 mb-1">222-813-9532</div>
-            <p class="font-semibold">ธนาคารกสิกรไทย</p>
-            <p class="text-sm opacity-70">ชื่อบัญชี: คำภีร์ แสงจันทร์สี</p>
-        </div>
-
-        <div class="space-y-4">
-            <button onclick="copyToClipboard('2228139532')" class="w-full py-5 btn-pay rounded-2xl font-bold text-lg">
-                คัดลอกเลขบัญชี
-            </button>
-            <p class="text-[10px] text-sky-400 font-bold uppercase tracking-widest">โอนแล้วแจ้งสลิปในแชทได้เลยครับ</p>
-        </div>
-
-        <div class="mt-12 pt-6 border-t border-sky-100 opacity-40">
-            <p class="text-[9px] tracking-widest">ARCHITECTED BY BLACKSMITH-Ω</p>
-        </div>
-    </div>
+        <div id="output"></div>
+    </main>
 
     <script>
+        function forge() {
+            const emotion = document.getElementById('emotion').value;
+            const clothing = document.getElementById('clothing').value;
+            const subject = document.getElementById('subject').value;
+            
+            // [ Ω ] THE PURE IDENTITY DNA: ล็อคความนิ่งของหน้าตาไว้ที่นี่
+            const dna = "Original character, modern anime style, Tokyo street idol aesthetic, sharp facial features, captivating eyes, slender build. Color palette: White, Black, Grey, subtle pastel accents. Simple minimal background.";
+            
+            const finalPrompt = `[VIRTUAL SHOGUN v2.0] ${dna} Subject: ${subject || 'The Idol'}. Emotion: ${emotion}. Wearing: ${clothing}. High detail, crisp lines, clean rendering --ar 2:3 --v 6.0 --style raw --s 750 --tile BlackSmith-Ω`;
+            
+            const out = document.getElementById('output');
+            out.innerHTML = `
+                <div class="prompt-box" onclick="copyToClipboard('${finalPrompt}')">
+                    ${finalPrompt}
+                    <div class="copy-hint">CLICK TO COPY</div>
+                </div>
+            ` + out.innerHTML;
+        }
+
         function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                alert("คัดลอกเลขบัญชีเจ๊เบวแล้วครับ: " + text);
-            });
+            navigator.clipboard.writeText(text);
+            alert("COPIED TO NEURAL LINK");
         }
     </script>
 </body>
