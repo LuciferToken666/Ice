@@ -3,77 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ω VIRTUAL SHOGUN v2.0</title>
+    <title>Ω VIRTUAL SHOGUN v4.0</title>
     <style>
-        :root {
-            --bg: #0a0a0a; --card: #111; --accent: #8aff8a; --text: #eee;
-        }
-        body {
-            margin: 0; font-family: 'Courier New', Courier, monospace;
-            background: var(--bg); color: var(--text); display: flex; flex-direction: column; align-items: center;
-        }
-        header { width: 100%; padding: 20px; text-align: center; border-bottom: 1px solid var(--accent); color: var(--accent); font-weight: bold; letter-spacing: 3px; }
-        main { width: 90%; max-width: 500px; padding: 30px 0; }
-        .box { background: var(--card); padding: 25px; border: 1px solid #222; border-radius: 4px; }
-        label { font-size: 10px; color: var(--accent); display: block; margin-bottom: 5px; letter-spacing: 1px; }
-        select, input { width: 100%; padding: 12px; background: #000; border: 1px solid #333; color: #fff; margin-bottom: 20px; outline: none; box-sizing: border-box; }
-        button { width: 100%; padding: 18px; background: var(--accent); color: #000; border: none; font-weight: bold; cursor: pointer; letter-spacing: 2px; }
-        .prompt-box { margin-top: 20px; background: #000; padding: 15px; border-left: 3px solid var(--accent); font-size: 12px; line-height: 1.5; color: #888; cursor: pointer; }
-        .copy-hint { font-size: 9px; color: var(--accent); margin-top: 5px; text-align: right; }
+        :root { --bg: #050505; --accent: #ffae00; --text: #f0f0f0; --card: #0d0d0d; }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); display: flex; flex-direction: column; align-items: center; }
+        header { width: 100%; padding: 20px; text-align: center; border-bottom: 2px solid var(--accent); color: var(--accent); letter-spacing: 6px; font-weight: 900; background: #000; box-shadow: 0 5px 20px rgba(255,174,0,0.2); }
+        main { width: 95%; max-width: 550px; padding: 30px 0; }
+        .box { background: var(--card); padding: 25px; border: 1px solid #222; position: relative; border-radius: 4px; }
+        label { font-size: 10px; color: var(--accent); display: block; margin-bottom: 5px; font-weight: bold; letter-spacing: 1px; }
+        select, input { width: 100%; padding: 12px; background: #000; border: 1px solid #333; color: #fff; margin-bottom: 15px; outline: none; box-sizing: border-box; border-radius: 4px; }
+        .btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        button { width: 100%; padding: 20px; border: none; font-weight: 900; cursor: pointer; letter-spacing: 2px; transition: 0.3s; border-radius: 4px; }
+        .btn-forge { background: var(--accent); color: #000; }
+        .btn-mutate { background: #000; color: var(--accent); border: 1px solid var(--accent); }
+        button:hover { filter: brightness(1.2); box-shadow: 0 0 15px var(--accent); }
+        .prompt-item { margin-top: 20px; background: #000; padding: 20px; border-left: 3px solid var(--accent); position: relative; animation: slideUp 0.4s ease; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .char-name { color: var(--accent); font-size: 16px; font-weight: 900; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; }
+        .prompt-text { font-size: 11px; color: #888; line-height: 1.6; word-break: break-all; }
+        .tag { position: absolute; top: 10px; right: 15px; font-size: 8px; font-weight: bold; background: var(--accent); color: #000; padding: 2px 6px; }
     </style>
 </head>
 <body>
-    <header>Ω VIRTUAL SHOGUN v2.0</header>
+    <header>VIRTUAL SHOGUN Ω v4.0</header>
     <main>
         <div class="box">
-            <label>CHOOSE EMOTION (เลือกอารมณ์)</label>
-            <select id="emotion">
-                <option value="confident smirk, looking at camera">😏 มั่นใจ / มองกล้อง</option>
-                <option value="mischievous cunning smile, teasing">😈 กวน / ยิ้มเจ้าเล่ห์</option>
-                <option value="stoic, cool, indifferent expression">😐 นิ่ง / เท่</option>
-                <option value="bored, tired eyes, half-closed eyelids">😴 เบื่อโลก</option>
-                <option value="relaxed internet idol vibe, soft smile">😌 ชิลแบบเน็ตไอดอล</option>
-            </select>
+            <label>IDENTITY URL (ล็อคหน้าตัวละครเดิม)</label>
+            <input id="refUrl" type="text" placeholder="วางลิงก์รูปต้นแบบที่นี่...">
 
-            <label>ATTIRE (ชุด)</label>
-            <select id="clothing">
-                <option value="oversized techwear hoodie">HOODIE (ฮู้ด)</option>
-                <option value="minimalist oversize t-shirt">T-SHIRT (เสื้อยืด)</option>
-                <option value="stylish street jacket">JACKET (แจ็กเก็ต)</option>
-            </select>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div>
+                    <label>GENDER</label>
+                    <select id="gender">
+                        <option value="female character">FEMALE</option>
+                        <option value="male character">MALE</option>
+                    </select>
+                </div>
+                <div>
+                    <label>EMOTION</label>
+                    <select id="emotion">
+                        <option value="confident smirk, looking at camera">😏 CONFIDENT</option>
+                        <option value="mischievous cunning smile, side-eye">😈 MISCHIEVOUS</option>
+                        <option value="stoic, cool, indifferent gaze">😐 STOIC</option>
+                        <option value="bored, tired eyes, half-closed">😴 BORED</option>
+                        <option value="relaxed idol, soft smile">😌 CHILL</option>
+                    </select>
+                </div>
+            </div>
 
-            <label>SUBJECT (ชื่อหรือสิ่งของที่ถือ)</label>
-            <input id="subject" type="text" placeholder="เช่น holding smartphone, black hair...">
+            <label>IDENTIFIER (จุดเด่น / ของถือ)</label>
+            <input id="subject" type="text" placeholder="e.g. silver hair, holding bubble tea...">
 
-            <button onclick="forge()">FORGE IDENTITY</button>
+            <div class="btn-group">
+                <button class="btn-forge" onclick="forge(false)">FORGE MANIFESTO</button>
+                <button class="btn-mutate" onclick="forge(true)">Ω MUTATE IDENTITY</button>
+            </div>
         </div>
-
         <div id="output"></div>
     </main>
 
     <script>
-        function forge() {
-            const emotion = document.getElementById('emotion').value;
-            const clothing = document.getElementById('clothing').value;
-            const subject = document.getElementById('subject').value;
-            
-            // [ Ω ] THE PURE IDENTITY DNA: ล็อคความนิ่งของหน้าตาไว้ที่นี่
-            const dna = "Original character, modern anime style, Tokyo street idol aesthetic, sharp facial features, captivating eyes, slender build. Color palette: White, Black, Grey, subtle pastel accents. Simple minimal background.";
-            
-            const finalPrompt = `[VIRTUAL SHOGUN v2.0] ${dna} Subject: ${subject || 'The Idol'}. Emotion: ${emotion}. Wearing: ${clothing}. High detail, crisp lines, clean rendering --ar 2:3 --v 6.0 --style raw --s 750 --tile BlackSmith-Ω`;
-            
-            const out = document.getElementById('output');
-            out.innerHTML = `
-                <div class="prompt-box" onclick="copyToClipboard('${finalPrompt}')">
-                    ${finalPrompt}
-                    <div class="copy-hint">CLICK TO COPY</div>
-                </div>
-            ` + out.innerHTML;
+        function generateCoolName() {
+            const prefix = ["Neo", "Zero", "Cyber", "Void", "Rai", "Kuro", "Shiro", "Luna", "Zen", "Astro"];
+            const suffix = ["Shogun", "Idol", "Vibe", "Soul", "X", "Alpha", "Phantom", "Pulse", "Nova", "Glint"];
+            return prefix[Math.floor(Math.random()*prefix.length)] + " " + suffix[Math.floor(Math.random()*suffix.length)];
         }
 
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text);
-            alert("COPIED TO NEURAL LINK");
+        function forge(isMutate) {
+            const ref = document.getElementById('refUrl').value;
+            const gender = document.getElementById('gender').value;
+            const emotion = document.getElementById('emotion').value;
+            const subject = document.getElementById('subject').value;
+            const charName = generateCoolName();
+            
+            const chaosSeed = isMutate ? Math.floor(Math.random() * 999999) : "";
+            const lock = ref ? `--cref ${ref} --cw 100` : "";
+            
+            const dna = "High-end modern anime style, Tokyo internet idol, sharp aesthetic, clean crisp lines.";
+            
+            // [ Ω ] SPLIT-VIEW + REMOVE BG COMMAND
+            const DUAL_CMD = "Split-view composition: LEFT HALF showing (Full color masterpiece, soft studio lighting, high detail) AND RIGHT HALF showing (Same character, Full body flat vector illustration, pure white background, perfectly cut out, no shadows, no background, high-contrast lines for easy background removal).";
+
+            const finalPrompt = `[VIRTUAL SHOGUN v4.0] NAME: ${charName}. ${dna} Identity: ${gender}. Subject: ${subject || 'The Chosen One'}. Emotion: ${emotion}. ${DUAL_CMD} --ar 3:2 --v 6.0 --style raw ${isMutate ? '--chaos 40' : ''} ${lock} --tile BlackSmith-Ω`;
+            
+            const out = document.getElementById('output');
+            const item = document.createElement('div');
+            item.className = 'prompt-item';
+            item.onclick = () => { navigator.clipboard.writeText(finalPrompt); alert("MANIFESTO SYNCED"); };
+            item.innerHTML = `
+                <div class="tag">MANIFESTO READY</div>
+                <div class="char-name">CODE NAME: ${charName}</div>
+                <div class="prompt-text">${finalPrompt}</div>
+                <p style="font-size: 8px; color: var(--accent); margin-top: 10px;">* คลิกเพื่อคัดลอกพรอพม์ (ซ้ายภาพสี / ขวาลบพื้นหลัง)</p>
+            `;
+            out.insertBefore(item, out.firstChild);
         }
     </script>
 </body>
